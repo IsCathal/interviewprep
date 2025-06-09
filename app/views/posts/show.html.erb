@@ -1,0 +1,29 @@
+<p style="color: green"><%= notice %></p>
+<p style="color: red"><%= alert %></p>
+
+
+<%= render @post %>
+
+<div>
+  <%= link_to "Edit this post", edit_post_path(@post) %> |
+  <%= link_to "Back to posts", posts_path %>
+
+  <%= button_to "Destroy this post", @post, method: :delete %>
+</div>
+
+<p><strong>Tags:</strong> <%= @post.tags.map(&:name).join(", ") %></p>
+
+
+<h2>Comments</h2>
+<% @post.comments.each do |comment| %>
+  <p><%= comment.content %></p>
+  <%= link_to "Edit this comment ", edit_post_comment_path(@post, comment) %> |  
+  <%= button_to "Delete", post_comment_path(@post, comment), method: :delete, data: { confirm: "Are you sure?" } %>
+<% end %>
+
+<h3>Add a Comment</h3>
+<%= form_with(model: [@post, @post.comments.build], local: true) do |form| %>
+  <%= form.text_area :content %><br>
+  <%= form.submit "Post Comment" %>
+<% end %>
+
