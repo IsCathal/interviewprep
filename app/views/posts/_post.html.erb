@@ -14,6 +14,9 @@
     <%= post.author_name %>
   </p>
 
-
+    <p>
+    <strong>Tags:</strong>
+  <%= post.tags.any? ? post.tags.map(&:name).join(", ") : "No tags" %>
+  </p>
 
 </div>
